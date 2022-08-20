@@ -37,9 +37,10 @@ namespace DjLogger
                     //_logFilePath);
                 File.AppendAllText(path, logLine);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                if (OperatingSystem.IsWindows())
+                    Helpers.TryLogLoggerException(ex, "FileLogger failed on attempt at writing to a log file.");
             }
         }
 
